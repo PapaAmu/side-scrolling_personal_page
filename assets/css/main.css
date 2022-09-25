@@ -1187,6 +1187,177 @@ ul.icons {
 			font-size: 1.25em;
 		}
 
+/* Grid Icons */
+
+ul.grid-icons {
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-moz-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+	list-style: none;
+	margin: 0 0 1.5rem 0;
+	padding-left: 0;
+}
+
+	ul.grid-icons .icon {
+		display: block;
+		position: relative;
+		width: 100%;
+		text-align: center;
+	}
+
+		ul.grid-icons .icon:before {
+			display: block;
+			width: 6rem;
+			height: 6rem;
+			line-height: 6rem;
+			border-radius: 6rem;
+			box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+			font-size: 2.5rem;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+			body.is-ie ul.grid-icons .icon:before {
+				line-height: 2.375;
+			}
+
+	ul.grid-icons > li {
+		-moz-flex-grow: 0;
+		-webkit-flex-grow: 0;
+		-ms-flex-grow: 0;
+		flex-grow: 0;
+		-moz-flex-shrink: 0;
+		-webkit-flex-shrink: 0;
+		-ms-flex-shrink: 0;
+		flex-shrink: 0;
+		position: relative;
+		margin: 1.5rem 0 0 1.5rem;
+		padding-left: 0;
+	}
+
+	ul.grid-icons.connected > li:before {
+		content: '';
+		display: block;
+		position: absolute;
+		width: 1.5rem;
+		height: 2px;
+		top: 50%;
+		left: -1.5rem;
+		background-color: rgba(255, 255, 255, 0.25);
+	}
+
+	ul.grid-icons.connected > li:after {
+		content: '';
+		display: block;
+		position: absolute;
+		width: 2px;
+		height: 1.5rem;
+		top: -1.5rem;
+		left: 50%;
+		background-color: rgba(255, 255, 255, 0.25);
+	}
+
+	ul.grid-icons.two {
+		width: 14rem;
+	}
+
+		ul.grid-icons.two > li:nth-child(-n + 2) {
+			margin-top: 0;
+		}
+
+			ul.grid-icons.two > li:nth-child(-n + 2):after {
+				display: none;
+			}
+
+		ul.grid-icons.two > li:nth-child(2n - 1) {
+			margin-left: 0;
+		}
+
+			ul.grid-icons.two > li:nth-child(2n - 1):before {
+				display: none;
+			}
+
+	ul.grid-icons.three {
+		width: 21.5rem;
+	}
+
+		ul.grid-icons.three > li:nth-child(-n + 3) {
+			margin-top: 0;
+		}
+
+			ul.grid-icons.three > li:nth-child(-n + 3):after {
+				display: none;
+			}
+
+		ul.grid-icons.three > li:nth-child(3n - 2) {
+			margin-left: 0;
+		}
+
+			ul.grid-icons.three > li:nth-child(3n - 2):before {
+				display: none;
+			}
+
+	ul.grid-icons.four {
+		width: 29rem;
+	}
+
+		ul.grid-icons.four > li:nth-child(-n + 4) {
+			margin-top: 0;
+		}
+
+			ul.grid-icons.four > li:nth-child(-n + 4):after {
+				display: none;
+			}
+
+		ul.grid-icons.four > li:nth-child(4n - 3) {
+			margin-left: 0;
+		}
+
+			ul.grid-icons.four > li:nth-child(4n - 3):before {
+				display: none;
+			}
+
+	@media screen and (max-width: 736px) {
+
+		ul.grid-icons {
+			-moz-justify-content: -moz-flex-start;
+			-webkit-justify-content: -webkit-flex-start;
+			-ms-justify-content: -ms-flex-start;
+			justify-content: flex-start;
+			width: 100% !important;
+			margin: -1rem 0 1.5rem -1rem;
+		}
+
+			ul.grid-icons .icon:before {
+				width: 4.5rem;
+				height: 4.5rem;
+				line-height: 4.5rem;
+				font-size: 1.75rem;
+			}
+
+			ul.grid-icons > li {
+				margin: 1rem 0 0 1rem !important;
+			}
+
+				ul.grid-icons > li:before {
+					display: none !important;
+				}
+
+				ul.grid-icons > li:after {
+					display: none !important;
+				}
+
+	}
+
 
 
 
