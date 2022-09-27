@@ -512,3 +512,69 @@
               }
 
           })
+
+          // Mouseup/mouseleave event.
+						.on('mouseup mouseleave', function(event) {
+
+							var m;
+
+							// Not dragging? Bail.
+								if (!dragging)
+									return;
+
+							// Dragged? Re-enable pointer events on all descendents.
+								if (dragged) {
+
+									setTimeout(function() {
+										$wrapper.removeClass('is-dragged');
+									}, 100);
+
+									dragged = false;
+
+								}
+
+							// Distance exceeds threshold? Prevent default.
+								if (distance > settings.dragging.threshold)
+									event.preventDefault();
+
+							// End drag.
+								dragging = false;
+								$wrapper.removeClass('is-dragging');
+								clearInterval(velocityIntervalId);
+								clearInterval(momentumIntervalId);
+
+							// Pause scroll zone.
+								$wrapper.triggerHandler('---pauseScrollZone');
+
+							// Initialize momentum interval.
+								if (settings.dragging.momentum > 0) {
+
+									m = velocity;
+
+									momentumIntervalId = setInterval(function() {
+
+										// Momentum is NaN? Bail.
+											if (isNaN(m)) {
+
+												clearInterval(momentumIntervalId);
+												return;
+
+											}
+
+										// Scroll page.
+											$document.scrollLeft($document.scrollLeft() + (m * direction));
+
+										// Decrease momentum.
+											m = m * settings.dragging.momentum;
+
+										// Negligible momentum? Clear interval and end.
+											if (Math.abs(m) < 1)
+												clearInterval(momentumIntervalId);
+
+									}, 15);
+
+								}
+
+						});
+
+			})();
