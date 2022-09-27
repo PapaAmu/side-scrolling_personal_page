@@ -331,4 +331,184 @@
 
     })();
 
+    // Scroll zones.
+		if (settings.scrollZones.enabled)
+    (function() {
 
+      var	$left = $('<div class="scrollZone left"></div>'),
+        $right = $('<div class="scrollZone right"></div>'),
+        $zones = $left.add($right),
+        paused = false,
+        intervalId = null,
+        direction,
+        activate = function(d) {
+
+          // Disable on <=small.
+            if (breakpoints.active('<=small'))
+              return;
+
+          // Paused? Bail.
+            if (paused)
+              return;
+
+          // Stop link scroll.
+            $bodyHtml.stop();
+
+          // Set direction.
+            direction = d;
+
+          // Initialize interval.
+            clearInterval(intervalId);
+
+            intervalId = setInterval(function() {
+              $document.scrollLeft($document.scrollLeft() + (settings.scrollZones.speed * direction));
+            }, 25);
+
+        },
+        deactivate = function() {
+
+          // Unpause.
+            paused = false;
+
+          // Clear interval.
+            clearInterval(intervalId);
+
+        };
+
+      $zones
+        .appendTo($wrapper)
+        .on('mouseleave mousedown', function(event) {
+          deactivate();
+        });
+
+      $left
+        .css('left', '0')
+        .on('mouseenter', function(event) {
+          activate(-1);
+        });
+
+      $right
+        .css('right', '0')
+        .on('mouseenter', function(event) {
+          activate(1);
+        });
+
+      $wrapper
+        .on('---pauseScrollZone', function(event) {
+
+          // Pause.
+            paused = true;
+
+          // Unpause after delay.
+            setTimeout(function() {
+              paused = false;
+            }, 500);
+
+        });
+
+    })();
+
+    // Dragging.
+		if (settings.dragging.enabled)
+    (function() {
+
+      var dragging = false,
+        dragged = false,
+        distance = 0,
+        startScroll,
+        momentumIntervalId, velocityIntervalId,
+        startX, currentX, previousX,
+        velocity, direction;
+
+      $wrapper
+
+        // Prevent image drag and drop.
+          .on('mouseup mousemove mousedown', '.image, img', function(event) {
+            event.preventDefault();
+          })
+
+        // Prevent mouse events inside excluded elements from bubbling.
+          .on('mouseup mousemove mousedown', settings.excludeSelector, function(event) {
+
+            // Prevent event from bubbling.
+              event.stopPropagation();
+
+            // End drag.
+              dragging = false;
+              $wrapper.removeClass('is-dragging');
+              clearInterval(velocityIntervalId);
+              clearInterval(momentumIntervalId);
+
+            // Pause scroll zone.
+              $wrapper.triggerHandler('---pauseScrollZone');
+
+          })
+
+        // Mousedown event.
+          .on('mousedown', function(event) {
+
+            // Disable on <=small.
+              if (breakpoints.active('<=small'))
+                return;
+
+            // Clear momentum interval.
+              clearInterval(momentumIntervalId);
+
+            // Stop link scroll.
+              $bodyHtml.stop();
+
+            // Start drag.
+              dragging = true;
+              $wrapper.addClass('is-dragging');
+
+            // Initialize and reset vars.
+              startScroll = $document.scrollLeft();
+              startX = event.clientX;
+              previousX = startX;
+              currentX = startX;
+              distance = 0;
+              direction = 0;
+
+            // Initialize velocity interval.
+              clearInterval(velocityIntervalId);
+
+              velocityIntervalId = setInterval(function() {
+
+                // Calculate velocity, direction.
+                  velocity = Math.abs(currentX - previousX);
+                  direction = (currentX > previousX ? -1 : 1);
+
+                // Update previous X.
+                  previousX = currentX;
+
+              }, 50);
+
+          })
+
+        // Mousemove event.
+          .on('mousemove', function(event) {
+
+            // Not dragging? Bail.
+              if (!dragging)
+                return;
+
+            // Velocity.
+              currentX = event.clientX;
+
+            // Scroll page.
+              $document.scrollLeft(startScroll + (startX - currentX));
+
+            // Update distance.
+              distance = Math.abs(startScroll - $document.scrollLeft());
+
+            // Distance exceeds threshold? Disable pointer events on all descendents.
+              if (!dragged
+              &&	distance > settings.dragging.threshold) {
+
+                $wrapper.addClass('is-dragged');
+
+                dragged = true;
+
+              }
+
+          })
