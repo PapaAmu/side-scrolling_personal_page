@@ -150,3 +150,82 @@
       });
 
     }
+
+    	// Keyboard shortcuts.
+		if (settings.keyboardShortcuts.enabled)
+    (function() {
+
+      $wrapper
+
+        // Prevent keystrokes inside excluded elements from bubbling.
+          .on('keypress keyup keydown', settings.excludeSelector, function(event) {
+
+            // Stop propagation.
+              event.stopPropagation();
+
+          });
+
+      $window
+
+        // Keypress event.
+          .on('keydown', function(event) {
+
+            var scrolled = false;
+
+            switch (event.keyCode) {
+
+              // Left arrow.
+                case 37:
+                  $document.scrollLeft($document.scrollLeft() - settings.keyboardShortcuts.distance);
+                  scrolled = true;
+                  break;
+
+              // Right arrow.
+                case 39:
+                  $document.scrollLeft($document.scrollLeft() + settings.keyboardShortcuts.distance);
+                  scrolled = true;
+                  break;
+
+              // Page Up.
+                case 33:
+                  $document.scrollLeft($document.scrollLeft() - $window.width() + 100);
+                  scrolled = true;
+                  break;
+
+              // Page Down, Space.
+                case 34:
+                case 32:
+                  $document.scrollLeft($document.scrollLeft() + $window.width() - 100);
+                  scrolled = true;
+                  break;
+
+              // Home.
+                case 36:
+                  $document.scrollLeft(0);
+                  scrolled = true;
+                  break;
+
+              // End.
+                case 35:
+                  $document.scrollLeft($document.width());
+                  scrolled = true;
+                  break;
+
+            }
+
+            // Scrolled?
+              if (scrolled) {
+
+                // Prevent default.
+                  event.preventDefault();
+                  event.stopPropagation();
+
+                // Stop link scroll.
+                  $bodyHtml.stop();
+
+              }
+
+          });
+
+    })();
+
