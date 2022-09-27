@@ -578,3 +578,52 @@
 						});
 
 			})();
+
+
+      // Link scroll.
+		$wrapper
+    .on('mousedown mouseup', 'a[href^="#"]', function(event) {
+
+      // Stop propagation.
+        event.stopPropagation();
+
+    })
+    .on('click', 'a[href^="#"]', function(event) {
+
+      var	$this = $(this),
+        href = $this.attr('href'),
+        $target, x, y;
+
+      // Get target.
+        if (href == '#'
+        ||	($target = $(href)).length == 0)
+          return;
+
+      // Prevent default.
+        event.preventDefault();
+        event.stopPropagation();
+
+      // Calculate x, y.
+        if (breakpoints.active('<=small')) {
+
+          x = $target.offset().top - (Math.max(0, $window.height() - $target.outerHeight()) / 2);
+          y = { scrollTop: x };
+
+        }
+        else {
+
+          x = $target.offset().left - (Math.max(0, $window.width() - $target.outerWidth()) / 2);
+          y = { scrollLeft: x };
+
+        }
+
+      // Scroll.
+        $bodyHtml
+          .stop()
+          .animate(
+            y,
+            settings.linkScrollSpeed,
+            'swing'
+          );
+
+    });
