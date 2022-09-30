@@ -791,7 +791,7 @@ input[type="radio"] {
 
 	input[type="checkbox"].color2 + label:before,
 	input[type="radio"].color2 + label:before {
-		color: #e37b7c;
+		color: #6c5e86;
 	}
 
 	input[type="checkbox"].color3 + label:before,
@@ -1648,7 +1648,7 @@ button,
 		input[type="button"].primary.color2,
 		button.primary.color2,
 		.button.primary.color2 {
-			color: #e37b7c !important;
+			color: #6c5e86 !important;
 		}
 
 		input[type="submit"].primary.color3,
@@ -2209,7 +2209,7 @@ button,
 		.panel > *.color2 {
 			background-image: url("../../images/overlay.png"), linear-gradient(45deg, rgba(114, 97, 147, 0.25) 25%, rgba(227, 123, 124, 0.25) 50%, rgba(255, 228, 180, 0.25));
 			background-size: 128px 128px, auto;
-			background-color: #e37b7c;
+			background-color: #6c5e86;
 		}
 
 		.panel > *.color3 {
@@ -2233,7 +2233,7 @@ button,
 		.panel > *.color2-alt {
 			background-image: url("../../images/overlay.png"), linear-gradient(45deg, rgba(114, 97, 147, 0.175) 25%, rgba(227, 123, 124, 0.175) 50%, rgba(255, 228, 180, 0.175));
 			background-size: 128px 128px, auto;
-			background-color: #de7172;
+			background-color: #323459;
 		}
 
 		.panel > *.color3-alt {
@@ -2726,7 +2726,7 @@ button,
 	.panel.color2 {
 		background-image: url("../../images/overlay.png"), linear-gradient(45deg, rgba(114, 97, 147, 0.25) 25%, rgba(227, 123, 124, 0.25) 50%, rgba(255, 228, 180, 0.25));
 		background-size: 128px 128px, auto;
-		background-color: #e37b7c;
+		background-color: #323459;
 	}
 
 	.panel.color3 {
@@ -2750,7 +2750,7 @@ button,
 	.panel.color2-alt {
 		background-image: url("../../images/overlay.png"), linear-gradient(45deg, rgba(114, 97, 147, 0.175) 25%, rgba(227, 123, 124, 0.175) 50%, rgba(255, 228, 180, 0.175));
 		background-size: 128px 128px, auto;
-		background-color: #de7172;
+		background-color: #323459;
 	}
 
 	.panel.color3-alt {
@@ -2784,7 +2784,7 @@ button,
 		.panel > *.color2 {
 			background-image: url("../../images/overlay.png"), linear-gradient(135deg, rgba(114, 97, 147, 0.25) 25%, rgba(227, 123, 124, 0.25) 50%, rgba(255, 228, 180, 0.25));
 			background-size: 128px 128px, auto;
-			background-color: #e37b7c;
+			background-color:#323459;
 		}
 
 		.panel > *.color3 {
@@ -2808,7 +2808,7 @@ button,
 		.panel > *.color2-alt {
 			background-image: url("../../images/overlay.png"), linear-gradient(135deg, rgba(114, 97, 147, 0.175) 25%, rgba(227, 123, 124, 0.175) 50%, rgba(255, 228, 180, 0.175));
 			background-size: 128px 128px, auto;
-			background-color: #de7172;
+			background-color: #323459;
 		}
 
 		.panel > *.color3-alt {
